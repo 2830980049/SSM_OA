@@ -11,11 +11,12 @@ import java.io.IOException;
  * @date 2020/6/19 22:00
  */
 public class EncodingFilter implements Filter {
-    private String encoding = "utf-8";
+    private String encoding = "UTF-8";
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        if (filterConfig.getInitParameter("encoding")!=null)
+        if (filterConfig.getInitParameter("encoding") != null)
             encoding = filterConfig.getInitParameter("encoding");
+        System.out.println(encoding);
     }
 
     @Override
