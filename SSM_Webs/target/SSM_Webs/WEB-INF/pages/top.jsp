@@ -39,17 +39,17 @@
                 </a>
                 <ul class="dropdown-menu list-group dropdown-persist w250" role="menu">
                     <li class="list-group-item">
-                        <a href="/self" class="animated animated-short fadeInUp">
+                        <a href="${pageContext.request.contextPath}/self" class="animated animated-short fadeInUp">
                             <span class="fa fa-user"></span> 个人信息
                             <span class="label label-warning"></span>
                         </a>
                     </li>
                     <li class="list-group-item">
-                        <a href="/to_change_password" class="animated animated-short fadeInUp">
+                        <a href="${pageContext.request.contextPath}/to_change_password" class="animated animated-short fadeInUp">
                             <span class="fa fa-gear"></span> 设置密码 </a>
                     </li>
                     <li class="dropdown-footer">
-                        <a href="/quit" class="">
+                        <a href="${pageContext.request.contextPath}/quit" class="">
                             <span class="fa fa-power-off pr5"></span> 退出 </a>
                     </li>
                 </ul>
@@ -84,7 +84,7 @@
             <ul class="nav sidebar-menu">
                 <li class="sidebar-label pt20">日常管理</li>
                 <li>
-                    <a href="/claim_voucher/deal">
+                    <a href="${pageContext.request.contextPath}/claim_voucher/deal">
                         <span class="glyphicon glyphicon-book"></span>
                         <span class="sidebar-title">待处理报销单</span>
                         <span class="sidebar-title-tray">
@@ -93,13 +93,13 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="/claim_voucher/self">
+                    <a href="${pageContext.request.contextPath}/claim_voucher/self">
                         <span class="glyphicon glyphicon-home"></span>
                         <span class="sidebar-title">个人报销单</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/claim_voucher/to_add">
+                    <a href="${pageContext.request.contextPath}/claim_voucher/to_add">
                         <span class="fa fa-calendar"></span>
                         <span class="sidebar-title">填写报销单</span>
                     </a>
@@ -130,11 +130,11 @@
                     </a>
                     <ul class="nav sub-nav">
                         <li>
-                            <a href="/department/list">
+                            <a href="${pageContext.request.contextPath}/department/list">
                                 <span class="glyphicon glyphicon-calendar"></span> 所有部门 </a>
                         </li>
                         <li class="active">
-                            <a href="/department/to_add">
+                            <a href="${pageContext.request.contextPath}/department/to_add">
                                 <span class="glyphicon glyphicon-check"></span> 添加部门 </a>
                         </li>
                     </ul>

@@ -1,5 +1,7 @@
 package com.edu.oa.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -9,14 +11,31 @@ import java.util.Date;
  */
 public class DealRecord {
     private Integer id;
-    private Integer claim_voucher_id;
-    private String deal_sn;
+    private Integer claim_voucher_id;   //报销单编号
+    private String deal_sn; //处理人编号
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date deal_time;
-    private String deal_way;
-    private String deal_result;
+    private String deal_way;    //处理方式
+    private String deal_result; //
     private String comment;
+    private Employee dealer;
+
+    public DealRecord(Integer id, Integer claim_voucher_id, String deal_sn, Date deal_time, String deal_way, String deal_result, String comment, Employee dealer) {
+        this.id = id;
+        this.claim_voucher_id = claim_voucher_id;
+        this.deal_sn = deal_sn;
+        this.deal_time = deal_time;
+        this.deal_way = deal_way;
+        this.deal_result = deal_result;
+        this.comment = comment;
+        this.dealer = dealer;
+    }
 
     public DealRecord() {
+    }
+
+    public Employee getDealer() {
+        return dealer;
     }
 
     @Override
@@ -29,7 +48,12 @@ public class DealRecord {
                 ", deal_way='" + deal_way + '\'' +
                 ", deal_result='" + deal_result + '\'' +
                 ", comment='" + comment + '\'' +
+                ", dealer=" + dealer +
                 '}';
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
     }
 
     public Integer getId() {
@@ -88,13 +112,4 @@ public class DealRecord {
         this.comment = comment;
     }
 
-    public DealRecord(Integer id, Integer claim_voucher_id, String deal_sn, Date deal_time, String deal_way, String deal_result, String comment) {
-        this.id = id;
-        this.claim_voucher_id = claim_voucher_id;
-        this.deal_sn = deal_sn;
-        this.deal_time = deal_time;
-        this.deal_way = deal_way;
-        this.deal_result = deal_result;
-        this.comment = comment;
-    }
 }

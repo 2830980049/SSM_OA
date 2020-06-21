@@ -28,6 +28,12 @@
         <property name="prefix" value="/WEB-INF/pages/"/>
     <!--   后缀     -->
         <property name="suffix" value=".jsp"/>
-
     </bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.edu.oa.global.LoginInterceotor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

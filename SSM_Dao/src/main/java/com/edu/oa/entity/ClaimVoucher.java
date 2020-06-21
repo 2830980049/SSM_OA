@@ -1,5 +1,7 @@
 package com.edu.oa.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -8,28 +10,30 @@ import java.util.Date;
  * @date 2020/6/20 11:48
  */
 public class ClaimVoucher {
-    private Integer id;
-    private String cause;
-    private String create_sn;
+    private Integer id; //编号
+    private String cause;   //
+    private String create_sn;   //创建者编号
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm")
     private Date create_time;
-    private String next_deal_sn;
+    private String next_deal_sn; //待处理人编号
     private Double total_amount;
     private String status;
+    private Employee creater;
+    private Employee dealer;
 
-    public ClaimVoucher() {
+    public ClaimVoucher(Integer id, String cause, String create_sn, Date create_time, String next_deal_sn, Double total_amount, String status, Employee creater, Employee dealer) {
+        this.id = id;
+        this.cause = cause;
+        this.create_sn = create_sn;
+        this.create_time = create_time;
+        this.next_deal_sn = next_deal_sn;
+        this.total_amount = total_amount;
+        this.status = status;
+        this.creater = creater;
+        this.dealer = dealer;
     }
 
-    @Override
-    public String toString() {
-        return "ClaimVoucher{" +
-                "id=" + id +
-                ", cause='" + cause + '\'' +
-                ", create_sn='" + create_sn + '\'' +
-                ", create_time=" + create_time +
-                ", next_deal_sn='" + next_deal_sn + '\'' +
-                ", total_amount=" + total_amount +
-                ", status='" + status + '\'' +
-                '}';
+    public ClaimVoucher() {
     }
 
     public Integer getId() {
@@ -88,13 +92,34 @@ public class ClaimVoucher {
         this.status = status;
     }
 
-    public ClaimVoucher(Integer id, String cause, String create_sn, Date create_time, String next_deal_sn, Double total_amount, String status) {
-        this.id = id;
-        this.cause = cause;
-        this.create_sn = create_sn;
-        this.create_time = create_time;
-        this.next_deal_sn = next_deal_sn;
-        this.total_amount = total_amount;
-        this.status = status;
+    @Override
+    public String toString() {
+        return "ClaimVoucher{" +
+                "id=" + id +
+                ", cause='" + cause + '\'' +
+                ", create_sn='" + create_sn + '\'' +
+                ", create_time=" + create_time +
+                ", next_deal_sn='" + next_deal_sn + '\'' +
+                ", total_amount=" + total_amount +
+                ", status='" + status + '\'' +
+                ", creater=" + creater +
+                ", dealer=" + dealer +
+                '}';
+    }
+
+    public Employee getCreater() {
+        return creater;
+    }
+
+    public void setCreater(Employee creater) {
+        this.creater = creater;
+    }
+
+    public Employee getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Employee dealer) {
+        this.dealer = dealer;
     }
 }

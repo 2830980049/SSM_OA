@@ -5,12 +5,13 @@ package com.edu.oa.entity;
  * @version 1.0
  * @date 2020/6/20 11:50
  */
-public class ClaimVoucherItem {
+public class ClaimVoucherItem { //报销单条目
     private Integer id;
-    private Integer claim_voucher_id;
-    private String item;
-    private Double amount;
+    private Integer claim_voucher_id; //报销单编号
+    private String item;    //费用类型
+    private Double amount;  //
     private String comment;
+
 
     public ClaimVoucherItem() {
     }
