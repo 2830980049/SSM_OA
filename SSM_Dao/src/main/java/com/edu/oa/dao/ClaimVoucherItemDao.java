@@ -14,7 +14,7 @@ import java.util.List;
 @Repository("ClaimVoucherItemDao")
 public interface ClaimVoucherItemDao {
     void insert(ClaimVoucherItem claimVoucherItem);
-    void update(ClaimVoucherItem claimVoucherItem);
+    void  update(ClaimVoucherItem claimVoucherItem);
     void delete(int id);
     List<ClaimVoucherItem> selectByClaimVoucher(int cvid);
 }

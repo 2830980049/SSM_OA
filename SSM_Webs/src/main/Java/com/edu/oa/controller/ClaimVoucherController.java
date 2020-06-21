@@ -2,6 +2,7 @@ package com.edu.oa.controller;
 
 import com.edu.oa.dto.ClaimVoucherInfo;
 import com.edu.oa.entity.ClaimVoucher;
+import com.edu.oa.entity.DealRecord;
 import com.edu.oa.entity.Employee;
 import com.edu.oa.global.Contant;
 import com.edu.oa.service.ClaimVoucherService;
@@ -39,7 +40,7 @@ public class ClaimVoucherController {
         info.getClaimVoucher().setCreate_sn(employee.getSn());
         System.out.println(info);
         claimVoucherService.save(info.getClaimVoucher(), info.getItems());
-        return "redirect:detail?id="+info.getClaimVoucher().getId();
+        return "redirect:deal";
     }
 
     @RequestMapping("/detail")
@@ -51,4 +52,62 @@ public class ClaimVoucherController {
         map.put("records", claimVoucherService.getRecords(id));
         return "claim_voucher_detail";
     }
+
+    @RequestMapping("/self")
+    public String self(Map<String,Object> map, HttpSession session){
+        Employee employee = (Employee)session.getAttribute("employee");
+        map.put("list", claimVoucherService.getForSelf(employee.getSn()));
+        return "claim_voucher_self";
+    }
+
+    @RequestMapping("/deal")
+    public String deal(Map<String,Object> map, HttpSession session){
+        Employee employee = (Employee)session.getAttribute("employee");
+        map.put("list", claimVoucherService.getForDeal(employee.getSn()));
+        return "claim_voucher_deal";
+    }
+
+    @RequestMapping("/to_update")
+    public String toUpdate(Map<String,Object> map, int id){
+        map.put("items", Contant.getItems());
+        ClaimVoucherInfo info = new ClaimVoucherInfo();
+        info.setClaimVoucher(claimVoucherService.get(id));
+        info.setItems(claimVoucherService.getItems(id));
+        map.put("info", info);
+        return "claim_voucher_update";
+    }
+
+    @RequestMapping("/update")
+    public String update(ClaimVoucherInfo info, HttpSession session){
+        Employee employee = (Employee)session.getAttribute("employee");
+        info.getClaimVoucher().setCreate_sn(employee.getSn());
+        claimVoucherService.update(info.getClaimVoucher(), info.getItems());
+        return "redirect:deal";
+    }
+
+    @RequestMapping("/submit")
+    public String submit(int id){
+        claimVoucherService.submit(id);
+        return "redirect:deal";
+    }
+
+    @RequestMapping("/to_check")
+    public String toCheck(Map<String,Object> map, int id){
+        map.put("claimVoucher", claimVoucherService.get(id));
+        map.put("items", claimVoucherService.getItems(id));
+        map.put("records", claimVoucherService.getRecords(id));
+        DealRecord dealRecord = new DealRecord();
+        dealRecord.setClaim_voucher_id(id);
+        map.put("record", dealRecord);
+        return "claim_voucher_check";
+    }
+
+    @RequestMapping("/check")
+    public String check(DealRecord dealRecord, HttpSession session){
+        Employee employee = (Employee)session.getAttribute("employee");
+        dealRecord.setDeal_sn(employee.getSn());
+        claimVoucherService.deal(dealRecord);
+        return "redirect:deal";
+    }
+
 }

@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: asus
@@ -7,6 +9,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
+<%@ page import="com.edu.oa.global.Contant" %>
 <jsp:include page="top.jsp"/>
 <section id="content" class="table-layout animated fadeIn">
     <div class="tray tray-center">
@@ -54,7 +57,7 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                <c:forEach items="${list}" var="cv">
                         <tr class="message-unread">
                             <td class="hidden-xs">
                                 <label class="option block mn">
@@ -62,24 +65,28 @@
                                     <span class="checkbox mn"></span>
                                 </label>
                             </td>
-                            <td>XX出差</td>
+                            <td>${cv.cause}</td>
                             <td class="hidden-xs">
-                                <span class="badge badge-warning mr10 fs11"> 新创建 </span>
+                                <span class="badge badge-warning mr10 fs11"> ${cv.status}</span>
                             </td>
-                            <td>10001</td>
-                            <td class="text-center fw600">4800.0</td>
-                            <td>2018-03-22 19:19</td>
+                            <td>${cv.creater.name}</td>
+                            <td class="text-center fw600">${cv.total_amount}</td>
+                            <td><spring:eval expression="cv.create_time"/></td>
                             <td>
-
-                                <a href="/claim_voucher/to_update?id=8">修改</a>
-                                <a href="/claim_voucher/submit?id=8">提交</a>
-
-
-
-                                <a href="/claim_voucher/detail?id=8">详细信息</a>
+                                <c:if test="${cv.status==Contant.CLAIMVOUCHER_CREATED || cv.status==Contant.CLAIMVOUCHER_BACK}">
+                                    <a href="/claim_voucher/to_update?id=${cv.id}">修改</a>
+                                    <a href="/claim_voucher/submit?id=${cv.id}">提交</a>
+                                </c:if>
+                                <c:if test="${cv.status==Contant.CLAIMVOUCHER_SUBMIT || cv.status==Contant.CLAIMVOUCHER_RECHECK}">
+                                    <a href="/claim_voucher/to_check?id=${cv.id}">审核</a>
+                                </c:if>
+                                <c:if test="${cv.status==Contant.CLAIMVOUCHER_APPROVED}">
+                                    <a href="/claim_voucher/to_check?id=${cv.id}">打款</a>
+                                </c:if>
+                                <a href="/claim_voucher/detail?id=${cv.id}">详细信息</a>
                             </td>
                         </tr>
-
+                </c:forEach>
                         </tbody>
                     </table>
                 </div>

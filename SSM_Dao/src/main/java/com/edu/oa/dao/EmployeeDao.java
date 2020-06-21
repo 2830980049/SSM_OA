@@ -1,6 +1,7 @@
 package com.edu.oa.dao;
 
 import com.edu.oa.entity.Employee;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface EmployeeDao {
     void delete(String sn);
     Employee select(String sn);
     List<Employee> selectAll();
+    // 多个参数 需要用@Param 知道参数名称
+    List<Employee> selectByDepartmentAndPost(@Param("dsn") String dsn,@Param("post") String post);
 }
